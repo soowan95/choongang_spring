@@ -14,4 +14,29 @@ public class Controller07 {
 
     return "view1";
   }
+
+  @RequestMapping("sub2")
+  public String method2() {
+    System.out.println("Controller07.method2");
+
+    return "html2";
+  }
+
+  // void return : 요청경로가 view name이 됨
+  // /main7/sub3
+  // view name : /main7/sub3
+  // 실제 jsp 경로 : /WEB-INF/jsp/main7/sub3.jsp
+  @RequestMapping("sub3")
+  public void method3() {
+    System.out.println("Controller07.method3");
+  }
+
+  @RequestMapping("sub4")
+  public String method4() {
+    return "/main7/html4";
+  }
+
+  @RequestMapping("sub5")
+  public void method5() {
+  }
 }
