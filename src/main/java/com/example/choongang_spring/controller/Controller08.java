@@ -13,4 +13,10 @@ public class Controller08 {
     model.addAttribute("attr1", "value1");
     model.addAttribute("attr2", "value2");
   }
+
+  @RequestMapping("sub2")
+  public void method2(Model model) {
+    model.addAttribute("propone", "😊");
+    model.addAttribute("proptwo", "😂");
+  }
 }
