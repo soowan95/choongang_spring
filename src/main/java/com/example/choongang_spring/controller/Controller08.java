@@ -19,4 +19,11 @@ public class Controller08 {
     model.addAttribute("propone", "😊");
     model.addAttribute("proptwo", "😂");
   }
+
+  @RequestMapping("sub3")
+  public void method3(Model model) {
+    model.addAttribute("myName", "soowan");
+    model.addAttribute("yourAddress", "seoul");
+    model.addAttribute("herEmail", "sh@naver.com");
+  }
 }
