@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: admin
   Date: 2023-09-27
-  Time: 오전 11:21
+  Time: 오후 12:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,12 +12,6 @@
     <title>Title</title>
 </head>
 <body>
-<h4>\${modelAttr1} : ${modelAttr1}</h4>
-<h4>\${sessionAttr1} : ${sessionAttr1}</h4>
-<h4>\${appAttr1} : ${appAttr1}</h4>
-
-<h4>\${attr1} : ${attr1}</h4>
-<h4>\${sessionScope.attr1} : ${sessionScope.attr1}</h4>
-<h4>\${applicationScope.attr1} : ${applicationScope.attr1}</h4>
+<h1>Here is /main16/sub5.jsp</h1>
 </body>
 </html>
