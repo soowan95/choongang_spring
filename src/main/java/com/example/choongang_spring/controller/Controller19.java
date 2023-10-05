@@ -93,14 +93,24 @@ public class Controller19 {
   }
 
   @GetMapping("sub11")
-  public String method11(Integer cid, Model model) throws SQLException {
+  public String method11(Integer cid, Model model, String ccountry) throws SQLException {
 
-    String sql = """
-                SELECT CustomerID, CustomerName, Address, Country
-                FROM customers
-                where CustomerId =
-                """;
-    sql += cid;
+    String sql = null;
+    if (cid != null) {
+      sql = """
+                  SELECT CustomerID, CustomerName, Address, Country
+                  FROM customers
+                  where CustomerId =
+                  """;
+      sql += cid;
+    } else if (ccountry != null){
+      sql = """
+                  SELECT CustomerID, CustomerName, Address, Country
+                  FROM customers
+                  where Country = 
+                  """;
+      sql = sql + "'" + ccountry + "'";
+    }
 
     Connection connection = dataSource.getConnection();
     Statement statement = connection.createStatement();

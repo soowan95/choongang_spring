@@ -15,7 +15,16 @@
 <h4>고객 조회</h4>
 <form action="/main19/sub11">
     고객 번호
-    <input type="text" name="cid">
+    <input type="text" name="cid" placeholder="id입력">
+    <button>조회</button>
+</form>
+<form action="/main19/sub11">
+    도시 이름
+    <select name="ccountry" id="">
+        <option value="France">France</option>
+        <option value="Germany">Germany</option>
+        <option value="UK">UK</option>
+    </select>
     <button>조회</button>
 </form>
 </body>
