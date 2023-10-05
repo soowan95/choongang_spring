@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -162,7 +163,7 @@ public class Controller20 {
   }
 
   @GetMapping("sub8")
-  public void method8(Integer min, Integer max, Model model) throws SQLException {
+  public void method8(Double min, Double max, Model model) throws SQLException {
 
     List<MyDto16> list = new ArrayList<>();
 
@@ -174,8 +175,8 @@ public class Controller20 {
 
     Connection c = dataSource.getConnection();
     PreparedStatement ps = c.prepareStatement(sql);
-    ps.setInt(1, min);
-    ps.setInt(2, max);
+    ps.setDouble(1, min);
+    ps.setDouble(2, max);
     ResultSet rs = ps.executeQuery();
 
     try (c; ps; rs) {
@@ -192,5 +193,109 @@ public class Controller20 {
     }
 
     model.addAttribute("productList", list);
+  }
+
+  @GetMapping("sub9")
+  public void method9(@RequestParam("country") List<String> countryList) throws SQLException {
+
+    String questionMarks = "";
+    for (int i = 0; i < countryList.size(); i++) {
+      questionMarks += "?";
+
+      if (i < countryList.size() - 1) {
+        questionMarks += ", ";
+      }
+    }
+
+    String sql = """
+            SELECT *
+            FROM customers
+            WHERE country IN ("""
+            + questionMarks +
+            """
+                    )""";
+
+    Connection c = dataSource.getConnection();
+    PreparedStatement ps = c.prepareStatement(sql);
+    for (int i = 0; i < countryList.size(); i++) {
+      ps.setString(i + 1, countryList.get(i));
+    }
+    ResultSet rs = ps.executeQuery();
+
+    try (c; ps; rs) {
+
+      System.out.println("고객 목록");
+      while (rs.next()) {
+
+        String name = rs.getString(2);
+        String country = rs.getString(7);
+
+        System.out.println(name + " : " + country);
+      }
+    }
+  }
+
+  @GetMapping("sub10")
+  public void method10(Model model) throws SQLException {
+
+    String sql = """
+            SELECT DISTINCT country
+            FROM suppliers
+            """;
+
+    Connection c = dataSource.getConnection();
+    Statement st = c.createStatement();
+    ResultSet rs = st.executeQuery(sql);
+
+    List<String> list = new ArrayList<>();
+
+    try (c; st; rs) {
+
+      while (rs.next()) {
+
+        list.add(rs.getString(1));
+      }
+    }
+
+    model.addAttribute("countryList", list);
+  }
+
+  @GetMapping("sub11")
+  public void method11(@RequestParam("country") List<String> countryList) throws SQLException {
+
+    String questionMarks = "";
+
+    for (int i = 0; i < countryList.size(); i++) {
+      questionMarks += "?";
+
+      if (i < countryList.size() - 1) {
+        questionMarks += ", ";
+      }
+    }
+
+    String sql = """
+            SELECT SupplierName, Country, City
+            FROM suppliers
+            WHERE Country IN ("""
+            + questionMarks +
+            """
+            )""";
+
+    Connection c = dataSource.getConnection();
+    PreparedStatement ps = c.prepareStatement(sql);
+    for (int i = 0; i < countryList.size(); i++) {
+      ps.setString(i + 1, countryList.get(i));
+    }
+    ResultSet rs = ps.executeQuery();
+
+    try (c; ps; rs) {
+
+      System.out.println("이름 \t 국가 \t 도시");
+      while (rs.next()) {
+
+        System.out.println();
+        System.out.println(rs.getString(1) + "|" + rs.getString(2) + "|" + rs.getString(3));
+      }
+    }
   }
 }
