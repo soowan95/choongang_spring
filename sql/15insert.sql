@@ -26,4 +26,10 @@ INSERT INTO products VALUE (80, '닭가슴살', 1, 1, '100 g', 1.2);
 
 INSERT INTO products (ProductName, SupplierID, CategoryID, Unit, Price) VALUE ('고구마', 2, 2, '1 kg', '5.00');
 
-SELECT * FROM products ORDER BY ProductID DESC ;
+SELECT * FROM products ORDER BY ProductID DESC;
+
+SELECT * FROM suppliers ORDER BY SupplierID DESC;
+
+SELECT * FROM employees ORDER BY EmployeeID DESC;
+
+DELETE FROM employees WHERE EmployeeID > 17;
