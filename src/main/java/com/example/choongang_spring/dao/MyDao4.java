@@ -1,9 +1,7 @@
 package com.example.choongang_spring.dao;
 
 import com.example.choongang_spring.domain.*;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -73,4 +71,53 @@ public interface MyDao4 {
   VALUES (#{lastName}, #{firstName})
   """)
   int insert2(MyDto32 emp);
+
+  @Delete("""
+  DELETE FROM customers
+  WHERE CustomerID = #{id}
+  """)
+  int delete1(Integer id);
+
+  @Delete("""
+  DELETE FROM products
+  WHERE ProductID = #{id}
+  """)
+  int delete2(Integer id);
+
+  @Select("""
+  SELECT EmployeeID id, LastName, FirstName, Photo, Notes, BirthDate
+  FROM employees
+  WHERE EmployeeID = #{id}
+  """)
+  MyDto33Employee select8(Integer id);
+
+  @Update("""
+  UPDATE employees
+  SET LastName = #{lastName},
+      FirstName = #{firstName},
+      Photo = #{photo},
+      Notes = #{notes},
+      BirthDate = #{birthDate}
+  WHERE EmployeeID = #{id}
+  """)
+  int update1(MyDto33Employee dto);
+
+  @Select("""
+  SELECT *
+  FROM customers
+  WHERE CustomerID = #{id}
+  """)
+  MyDto34Customer select9(Integer id);
+
+  @Update("""
+  UPDATE customers
+  SET CustomerName = #{customerName},
+      ContactName = #{contactName},
+      Address = #{address},
+      City = #{city},
+      PostalCode = #{postalCode},
+      Country = #{country}
+  WHERE CustomerID = #{customerId}
+  """)
+  int update2(MyDto34Customer dto);
 }

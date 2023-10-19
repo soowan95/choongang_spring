@@ -4,6 +4,7 @@ import com.example.choongang_spring.dao.MyDao4;
 import com.example.choongang_spring.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,5 +83,62 @@ public class Controller30 {
     System.out.println(row + "행이 입력됨");
 
     return "redirect:/main30/sub9";
+  }
+
+  @GetMapping("sub11")
+  public void method11(Integer id) {
+    int rows = dao.delete1(id);
+    System.out.println("rows = " + rows + "개 행 지워짐");
+  }
+
+  @GetMapping("sub12")
+  public void method12(Integer pid) {
+    int rows = dao.delete2(pid);
+    System.out.println(rows + "개 삭제");
+  }
+
+  @GetMapping("sub13")
+  public void method13(Integer id, Model model) {
+    MyDto33Employee employee = dao.select8(id);
+
+    model.addAttribute("employee", employee);
+
+  }
+
+  @PostMapping("sub14")
+  public String method14(MyDto33Employee dto, RedirectAttributes rttr) {
+    int rows = dao.update1(dto);
+
+    if (rows == 1) {
+      rttr.addFlashAttribute("message", "정보가 수정되었습니다.");
+    } else {
+      rttr.addFlashAttribute("message", "정보가 수정되지 않았습니다.");
+    }
+
+    rttr.addAttribute("id", dto.getId());
+
+    return "redirect:/main30/sub13";
+  }
+
+  @GetMapping("sub15")
+  public void method15(Integer id, Model model) {
+    MyDto34Customer customer = dao.select9(id);
+
+    model.addAttribute("customer", customer);
+  }
+
+  @PostMapping("sub16")
+  public String method16(MyDto34Customer dto, RedirectAttributes rttr) {
+    int rows = dao.update2(dto);
+
+    if (rows == 1) {
+      rttr.addFlashAttribute("msg", "잘 수정됨");
+    } else {
+      rttr.addFlashAttribute("msg", "수정안됨");
+    }
+
+    rttr.addAttribute("id", dto.getCustomerId());
+
+    return "redirect:/main30/sub15";
   }
 }
