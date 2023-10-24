@@ -90,7 +90,18 @@
         <button onclick="ajax12()">button12</button>
     </div>
 </div>
+<div>
+    <div>
+        <button onclick="ajax13()">button13</button>
+    </div>
+</div>
 <script>
+    function ajax13() {
+        // axios.request({
+        //     url: "/main35/sub11"
+        // });
+        axios.get("/main35/sub11");
+    }
     function ajax12() {
         axios.postForm("/main35/sub10", {
             name: document.querySelector("#input12").value,
