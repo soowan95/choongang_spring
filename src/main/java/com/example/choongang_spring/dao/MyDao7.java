@@ -1,6 +1,7 @@
 package com.example.choongang_spring.dao;
 
 import com.example.choongang_spring.domain.MyDto40;
+import com.example.choongang_spring.domain.MyDto41;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
