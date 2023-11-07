@@ -1,6 +1,7 @@
 package com.example.choongang_spring.controller;
 
 import com.example.choongang_spring.dao.RestDao01;
+import com.example.choongang_spring.domain.MyDto34Customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +25,11 @@ public class RestController01 {
   @ResponseBody
   public String method2() {
     return dao.select();
+  }
+
+  @GetMapping("sub3")
+  @ResponseBody
+  public MyDto34Customer method3() {
+    return dao.selectCustomer();
   }
 }
