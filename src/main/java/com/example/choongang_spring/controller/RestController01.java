@@ -9,10 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+//@Controller
+//@ResponseBody
+@RestController
 @RequestMapping("api/main1")
 @RequiredArgsConstructor
 public class RestController01 {
@@ -20,25 +23,21 @@ public class RestController01 {
   private final RestDao01 dao;
 
   @GetMapping("sub1")
-  @ResponseBody
   public String method1() {
     return "hello boot app!!";
   }
 
   @GetMapping("sub2")
-  @ResponseBody
   public String method2() {
     return dao.select();
   }
 
   @GetMapping("sub3")
-  @ResponseBody
   public MyDto34Customer method3() {
     return dao.selectCustomer();
   }
 
   @GetMapping("sub4")
-  @ResponseBody
   public ResponseEntity<String> method4(Integer id) {
     String cName = dao.selectByCustomerId(id);
     if (cName == null) {
@@ -48,7 +47,6 @@ public class RestController01 {
   }
 
   @GetMapping("sub5")
-  @ResponseBody
   public ResponseEntity<MyDto33Employee> method5(Integer id) {
     MyDto33Employee employee = dao.selectByEmployeeId(id);
     if (employee == null) {
@@ -58,13 +56,11 @@ public class RestController01 {
   }
 
   @GetMapping("sub6")
-  @ResponseBody
   public List<Integer> method6() {
     return dao.selectCustomerIdList();
   }
 
   @GetMapping("sub7")
-  @ResponseBody
   public List<Integer> method7() {
     return dao.selectEmployeeIdList();
   }
