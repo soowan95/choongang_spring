@@ -1,5 +1,6 @@
 package com.example.choongang_spring.dao;
 
+import com.example.choongang_spring.domain.MyDto33Employee;
 import com.example.choongang_spring.domain.MyDto34Customer;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -27,4 +28,11 @@ public interface RestDao01 {
   WHERE CustomerID = #{id}
   """)
   String selectByCustomerId(Integer id);
+
+  @Select("""
+  SELECT *
+  FROM employees
+  WHERE EmployeeID = #{id}
+  """)
+  MyDto33Employee selectByEmployeeId(Integer id);
 }
