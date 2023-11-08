@@ -3,6 +3,7 @@ package com.example.choongang_spring.controller;
 import com.example.choongang_spring.dao.RestDao01;
 import com.example.choongang_spring.domain.MyDto34Customer;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +32,15 @@ public class RestController01 {
   @ResponseBody
   public MyDto34Customer method3() {
     return dao.selectCustomer();
+  }
+
+  @GetMapping("sub4")
+  @ResponseBody
+  public ResponseEntity<String> method4(Integer id) {
+    String cName = dao.selectByCustomerId(id);
+    if (cName == null) {
+      return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.ok(cName);
   }
 }

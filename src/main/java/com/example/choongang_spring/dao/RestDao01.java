@@ -20,4 +20,11 @@ public interface RestDao01 {
   WHERE CustomerID = 7;
   """)
   MyDto34Customer selectCustomer();
+
+  @Select("""
+  SELECT CustomerName
+  FROM customers
+  WHERE CustomerID = #{id}
+  """)
+  String selectByCustomerId(Integer id);
 }
